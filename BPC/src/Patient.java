@@ -22,4 +22,8 @@ public class Patient {
     public int getPatientId(){
         return id;
     }
+
+    public String toString(){
+        return "******Patient: \nID: " + id + "\nName: " + firstName + " " + lastName ;
+    }
 }

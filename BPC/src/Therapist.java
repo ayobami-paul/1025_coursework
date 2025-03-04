@@ -26,6 +26,6 @@ public class Therapist {
     }
 
     public String toString(){
-        return "******Therapist: \nID: " + id + "\nFirst Name: " + firstName + "\nLast Name: " + lastName +"\nExpertise: " + expertise;
+        return "******Therapist: \nID: " + id + "\nName: " + firstName + " " + lastName +"\nExpertise: " + expertise;
     }
 }

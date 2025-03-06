@@ -1,10 +1,8 @@
 public class Appointment {
-    private int id;
     private String treatmentType;
     private String date;
     private String time;
     private String status;
-
 
     public Appointment() {
 
@@ -16,13 +14,10 @@ public class Appointment {
         status = "Booked";
     }
 
-    public void cancelAppointment(int id){
+    public void cancelAppointment(){
         status = "Cancelled";
     }
 
-    public void getAppointment(int id){
-
-    }
 
     public void getAllAppointments(){
 

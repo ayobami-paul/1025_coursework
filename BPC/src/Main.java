@@ -1,12 +1,12 @@
 public class Main {
     public static void main(String[] args) {
-        Therapist dew = new Therapist(1, "bob", "dylan");
-        Patient pop = new Patient(1, "paul","chalamet");
+        Therapist dew = new Therapist("bob", "dylan");
+        Patient pop = new Patient( "paul","chalamet");
 
-        dew.addExpertise("massage");
-        dew.addExpertise("acupuncture");
+        dew.addExpertise("Physiotherapy");
+        dew.addExpertise("Osteopathy");
 
-        System.out.println(dew.toString());
-        System.out.println(pop.toString());
+        String a = pop.getId();
+        System.out.println(a);
     }
 }

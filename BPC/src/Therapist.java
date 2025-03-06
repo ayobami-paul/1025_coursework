@@ -1,31 +1,27 @@
 import java.util.ArrayList;
 
-public class Therapist {
+public class Therapist extends Member{
     private int id;
     private String firstName;
     private String lastName;
     private ArrayList<String> expertise;
 
-    public Therapist(int id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Therapist(String firstName, String lastName){
+        super(firstName, lastName);
         expertise = new ArrayList<String>();
     }
 
-    public void addExpertise(String treatmentExpertise) {
-        expertise.add(treatmentExpertise);
+    public Therapist(String firstName, String lastName, String address, String phone){
+        super(firstName, lastName,address,phone);
+        expertise = new ArrayList<String>();
     }
 
-    public void getTherapist(int id){
-//        return id;
+    public void addExpertise(String doctorExpertise) {
+        expertise.add(doctorExpertise);
     }
 
-    public void getByExpertise(String expertise){
-
-    }
-
-    public String toString(){
-        return "******Therapist: \nID: " + id + "\nName: " + firstName + " " + lastName +"\nExpertise: " + expertise;
+    public void print(){
+        System.out.println("*********Physiotherapist Information*********");
+        super.print();
     }
 }

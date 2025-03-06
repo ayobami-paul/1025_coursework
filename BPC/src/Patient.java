@@ -1,29 +1,15 @@
-public class Patient {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String phone;
+public class Patient extends Member{
 
-    public Patient(int id, String firstName, String lastName){
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Patient(String firstName, String lastName){
+        super(firstName, lastName);
     }
 
-    public Patient(int id, String firstName, String lastName, String address, String phone){
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
+    public Patient(String firstName, String lastName, String address, String phone){
+        super(firstName, lastName,address,phone);
     }
 
-    public int getPatientId(){
-        return id;
-    }
-
-    public String toString(){
-        return "******Patient: \nID: " + id + "\nName: " + firstName + " " + lastName ;
+    public void print(){
+        System.out.println("*********Patient Information*********");
+        super.print();
     }
 }

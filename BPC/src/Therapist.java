@@ -20,8 +20,7 @@ public class Therapist extends Member{
         expertise.add(doctorExpertise);
     }
 
-    public void print(){
-        System.out.println("*********Physiotherapist Information*********");
-        super.print();
+    public String toString(){
+        return "*********Physiotherapist Information*********" + super.toString();
     }
 }

@@ -25,8 +25,8 @@ public class Member {
         return id;
     }
 
-    public void print(){
-        System.out.println("\nID: " + id + "\nName: " + firstName + " " + lastName + "\nAddress: " + address + "\nPhone Number: " + phone);
+    public String toString(){
+        return "\nID: " + id + "\nName: " + firstName + " " + lastName + "\nAddress: " + address + "\nPhone Number: " + phone + "\n";
     }
 
 }

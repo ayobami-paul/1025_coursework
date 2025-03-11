@@ -1,7 +1,8 @@
+import java.time.LocalDateTime;
+
 public class Appointment {
     private String treatmentType;
-    private String date;
-    private String time;
+    private LocalDateTime date;
     private String status;
 
     public Appointment() {

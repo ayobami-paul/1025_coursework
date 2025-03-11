@@ -10,11 +10,20 @@ public class Clinic {
         patients = new ArrayList<Patient>();
     }
 
-    public void addPatient(Patient p){
-        while(patients.size() < 10){
-            patients.add(p);
-            break;
+    public void addTherapist(Therapist t){
+        therapists.add(t);
+    }
+
+    public void removeTherapist(Therapist t){
+        for(int i = 0; i < therapists.size(); i++){
+            if (therapists.get(i).equals(t)){
+                therapists.remove(i);
+            }
         }
+    }
+
+    public void addPatient(Patient p){
+            patients.add(p);
     }
 
     public void removePatient(Patient p){

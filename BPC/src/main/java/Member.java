@@ -21,12 +21,19 @@ public class Member {
         this.phone = phone;
     }
 
-    public String getId() {
-        return id;
+    public void getId() {
+        System.out.println(id);
     }
 
     public String toString(){
-        return "\nID: " + id + "\nName: " + firstName + " " + lastName + "\nAddress: " + address + "\nPhone Number: " + phone + "\n";
+        String place = (address == null) ? "None" : address;
+        String number = (phone == null) ? "None" : phone;
+
+        return "\nID: " + id +
+                "\nName: " + firstName + " " + lastName +
+                "\nAddress: " + place +
+                "\nPhone Number: " + number +
+                "\n";
     }
 
 }

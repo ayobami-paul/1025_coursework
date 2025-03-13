@@ -1,26 +1,43 @@
 import java.time.LocalDateTime;
 
 public class Appointment {
-    private String treatmentType;
+    private Patient patient;
+    private Therapist therapist;
     private LocalDateTime date;
+    private Treatment treatment;
     private String status;
 
-    public Appointment() {
-
+    public Appointment(Therapist therapist) {
+        this.therapist = therapist;
+        status = "Available";
     }
 
-    public void bookAppointment() {
-        // accept treatment, physio name and time
-        // if time and physio exists, add treatment, patient and status to appointment
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public Therapist getTherapist() {
+        return therapist;
+    }
+
+    public Treatment getTreatment() {
+        return treatment;
+    }
+
+    public void book() {
         status = "Booked";
     }
 
-    public void cancelAppointment(){
+    public void cancel(){
         status = "Cancelled";
     }
 
-
-    public void getAllAppointments(){
-
+    public void attend() {
+        status = "Attended";
     }
+
+    public String getStatus() {
+        return status;
+    }
+
 }

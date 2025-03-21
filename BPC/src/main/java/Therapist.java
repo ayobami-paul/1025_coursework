@@ -15,6 +15,7 @@ public class Therapist extends Member{
         initializeExpertiseTreatments();
     }
 
+
     private void initializeExpertiseTreatments() {
         expertiseTreatments = new HashMap<>();
 
@@ -47,6 +48,7 @@ public class Therapist extends Member{
         expertiseTreatments.put("neurological physiotherapy", neurologicalPhysiotherapyTreatments);
     }
 
+
     public Therapist(String firstName, String lastName, String address, String phone){
         super(firstName, lastName,address,phone);
         expertise = new ArrayList<String>();
@@ -55,6 +57,7 @@ public class Therapist extends Member{
     public void getTherapistId(){
         super.getId();
     }
+
 
     public void addExpertise(String doctorExpertise) {
         if (expertiseTreatments.containsKey(doctorExpertise.toLowerCase())) {
@@ -80,6 +83,7 @@ public class Therapist extends Member{
         return allTreatments;
     }
 
+
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
     }
@@ -87,6 +91,7 @@ public class Therapist extends Member{
     public List<Appointment> getAppointments(){
         return appointments;
     }
+
 
     public String toString(){
         return "*********Physiotherapist Information*********" + super.toString();

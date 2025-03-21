@@ -12,26 +12,34 @@ public class Clinic {
     }
 
     public void addTherapist(Therapist t) {
-        therapists.add(t);
+        if (!therapists.contains(t)) {
+            therapists.add(t);
+        } else {
+            System.out.println("Therapist already exists");
+        }
     }
 
     public void removeTherapist(Therapist t) {
-        for (int i = 0; i < therapists.size(); i++) {
-            if (therapists.get(i).equals(t)) {
-                therapists.remove(i);
-            }
+        if (therapists.contains(t)) {
+            therapists.remove(t);
+        } else {
+            System.out.println("Therapist not found");
         }
     }
 
     public void addPatient(Patient p) {
-        patients.add(p);
+        if (!patients.contains(p)) {
+            patients.add(p);
+        } else{
+            System.out.println("Patient already exists");
+        }
     }
 
     public void removePatient(Patient p) {
-        for (int i = 0; i < patients.size(); i++) {
-            if (patients.get(i).equals(p)) {
-                patients.remove(i);
-            }
+        if(patients.contains(p)) {
+            patients.remove(p);
+        } else {
+            System.out.println("Patient not found");
         }
     }
 
@@ -57,11 +65,11 @@ public class Clinic {
         }
     }
 
-    public void searchByExpertise(String name) {
-        for (int i = 0; i < therapists.size(); i++) {
-            Therapist therapist = therapists.get(i);
-        }
-    }
+//    public void searchByExpertise(String name) {
+//        for (int i = 0; i < therapists.size(); i++) {
+//            Therapist therapist = therapists.get(i);
+//        }
+//    }
 
 
 

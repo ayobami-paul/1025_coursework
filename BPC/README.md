@@ -1,14 +1,17 @@
 ## BPC 
-jbn
-
+system design for a clinic with functions to 
+- add/remove patients
+- search up appointments by therapist name
+- search up appointments by therapist expertise
+- book, cancel, change appointments
 
 ---
 # assumptions:
 - all appointments run for a maximum of one hour
-- there are a fixed number of treatments under each expertise
-i.e
-- for expertise 1: treatment 1,2,3,4
-- for expertise 2: treatment 5,6,7,8
-- for expertise 3: treatment 9,10,11
+- there are a fixed number of treatments under each expertise i.e :
+1. physiotherapy: mobilisation of the spine and joints, massage, exercise therapy, electrotherapy, 
+2. ostheopathy: spinal manipulation, soft tissue techniques, cranial ostheopathy
+3. rehabilitation: pool rehabilitation, gait training, functional training,
+4. neurological physiotherapy: neural mobilisation, coordination exercises
 
----
+- 

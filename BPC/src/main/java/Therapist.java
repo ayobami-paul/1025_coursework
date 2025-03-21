@@ -15,6 +15,11 @@ public class Therapist extends Member{
         initializeExpertiseTreatments();
     }
 
+    public Therapist(String firstName, String lastName, String address, String phone){
+        super(firstName, lastName,address,phone);
+        expertise = new ArrayList<String>();
+    }
+
 
     private void initializeExpertiseTreatments() {
         expertiseTreatments = new HashMap<>();
@@ -49,19 +54,14 @@ public class Therapist extends Member{
     }
 
 
-    public Therapist(String firstName, String lastName, String address, String phone){
-        super(firstName, lastName,address,phone);
-        expertise = new ArrayList<String>();
-    }
-
-    public void getTherapistId(){
-        super.getId();
+    public String getTherapistId(){
+        return super.getId();
     }
 
 
     public void addExpertise(String doctorExpertise) {
         if (expertiseTreatments.containsKey(doctorExpertise.toLowerCase())) {
-            expertise.add(doctorExpertise);
+            expertise.add(doctorExpertise.toLowerCase());
         } else {
             throw new IllegalArgumentException("Invalid expertise: " + doctorExpertise);
         }

@@ -3,12 +3,12 @@ import java.util.ArrayList;
 public class Clinic {
     private ArrayList<Therapist> therapists;
     private ArrayList<Patient> patients;
-
+    private ArrayList<Appointment> appointments;
 
     public Clinic() {
         therapists = new ArrayList<Therapist>();
         patients = new ArrayList<Patient>();
-
+        appointments = new ArrayList<Appointment>();
     }
 
     public void addTherapist(Therapist t) {
@@ -72,7 +72,9 @@ public class Clinic {
 //    }
 
 
-
+    public void bookAppointment(Appointment a) {
+        appointments.add(a);
+    }
 
     public void getAllAppointments(){
 

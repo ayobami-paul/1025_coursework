@@ -21,8 +21,8 @@ public class Member {
         this.phone = phone;
     }
 
-    public void getId() {
-        System.out.println(id);
+    public String getId() {
+        return this.id;
     }
 
     public String toString(){

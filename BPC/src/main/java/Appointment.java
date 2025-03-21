@@ -1,18 +1,22 @@
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class Appointment {
     private Patient patient;
     private Therapist therapist;
     private int time;
-    private Treatment treatment;
     private String status;
     private String bookingId;
+    private String treatmentName;
 
-    public Appointment(Therapist therapist) {
+    public Appointment(Patient patient, Therapist therapist, String treatmentName, int time) {
+        this.patient = patient;
         this.therapist = therapist;
         this.status = "Available";
-        this.time = LocalDateTime.now().getHour();
+        this.treatmentName = treatmentName;
+        this.time = time;
+        this.bookingId = null;
     }
 
     public Patient getPatient() {
@@ -27,8 +31,14 @@ public class Appointment {
         return bookingId;
     }
 
-    public Treatment getTreatment() {
-        return treatment;
+    // this method seems redundant
+    // i'm converting the treatments to individual strings instead of an array is why i'm leaving it for now
+    public String getTreatmentsByTherapist() {
+        String treatments = "";
+        for(String treatment: this.therapist.getAllTreatments()){
+            treatments +=  treatment + ", ";
+        };
+        return treatments;
     }
 
     public int getAppointmentTime(){

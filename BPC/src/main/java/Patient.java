@@ -8,8 +8,8 @@ public class Patient extends Member{
         super(firstName, lastName,address,phone);
     }
 
-    public void getPatientId(){
-        super.getId();
+    public String getPatientId(){
+        return super.getId();
     }
 
     public String toString(){

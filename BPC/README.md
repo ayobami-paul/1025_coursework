@@ -14,4 +14,5 @@ system design for a clinic with functions to
 3. rehabilitation: pool rehabilitation, gait training, functional training,
 4. neurological physiotherapy: neural mobilisation, coordination exercises
 
-- 
+- therefore, adding expertise to a therapist automatically adds their treatments
+- the time table of the therapist is based solely on their availability and not on treatments

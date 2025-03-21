@@ -25,9 +25,23 @@ public class Member {
         return this.id;
     }
 
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
     public String toString(){
-        String place = (address == null) ? "None" : address;
-        String number = (phone == null) ? "None" : phone;
+
+        if(address == null && phone == null){
+            return "\nID: " + id +
+                    "\nName: " + firstName + " " + lastName;
+        }
+
+        String place = (address == null) ? "Not available" : address;
+        String number = (phone == null) ? "Not available" : phone;
 
         return "\nID: " + id +
                 "\nName: " + firstName + " " + lastName +

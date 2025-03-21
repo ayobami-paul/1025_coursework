@@ -83,6 +83,28 @@ public class Therapist extends Member{
         return allTreatments;
     }
 
+    public String getTreatments() {
+        String allTreatments = "";
+        for (String exp : expertise) {
+            for(String treatment: expertiseTreatments.get(exp)){
+                allTreatments +=  treatment + ", ";
+            };
+        }
+        return allTreatments;
+    }
+
+    public String getTreatmentName(String name){
+        String treatmentName = "";
+        for (String exp : expertise) {
+            for (String treatment : expertiseTreatments.get(exp)){
+                if (treatment.equals(name)){
+                    treatmentName = treatment;
+                }
+            };
+        }
+        return treatmentName;
+    }
+
 
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);

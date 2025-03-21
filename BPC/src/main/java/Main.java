@@ -11,19 +11,25 @@ public class Main {
         t1.addExpertise("Physiotherapy");
         t1.addExpertise("Osteopathy");
 
-        System.out.println(t1.getTherapistId());
-        System.out.println(t1.getExpertise());
-        System.out.println(t1.getTreatmentsForExpertise("physiotherapy"));
-        System.out.println(t1.getAllTreatments());
+//        System.out.println("Treatment: "+ t1.getTreatmentName("massage"));
+
+
+//        System.out.println(t1.getTherapistId());
+//        System.out.println(t1.getExpertise());
+//        System.out.println(t1.getTreatmentsForExpertise("physiotherapy"));
+//        System.out.println(t1.getAllTreatments());
 
 //        System.out.println(app1.getTreatmentsByTherapist());
+//        System.out.println(t1.toString());
 
         Clinic c1 = new Clinic();
-        c1.addPatient(p1);
-        c1.addPatient(p2);
+        c1.addTherapist(t1);
+        System.out.println();
+        c1.searchByTherapist("dylan");
 
-        c1.removePatient(p1);
-
+//        c1.addPatient(p1);
+//        c1.addPatient(p2);
+//        c1.removePatient(p1);
 //        c1.getAllPatients();
     }
 }

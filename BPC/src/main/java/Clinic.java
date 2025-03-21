@@ -58,23 +58,58 @@ public class Clinic {
     }
 
     public void searchByExpertise(String expertise) {
-        // accept treatment, physio name and time
-        // if time and physio exists, add treatment, patient and status to appointment
-        for (int i = 0; i < therapists.size(); i++) {
-            Therapist therapist = therapists.get(i);
+        for (Therapist therapist : therapists) {
+            if (therapist.getExpertise().contains(expertise)) {
+                //display all therapists names
+                therapist.getFirstName();
+                therapist.getLastName();
+
+                //display all treatments
+                therapist.getAllTreatments();
+                //display schedule for those treatments
+
+            }
         }
     }
 
-//    public void searchByExpertise(String name) {
-//        for (int i = 0; i < therapists.size(); i++) {
-//            Therapist therapist = therapists.get(i);
-//        }
-//    }
+    public void searchByTherapist(String name) {
+        for (Therapist therapist : therapists){
+            if(therapist.getFirstName().equals(name) || therapist.getLastName().equals(name)) {
+                //display all treatments
+                System.out.println(therapist.getTreatments());
+//                System.out.println(therapist.getAllTreatments());
 
-
-    public void bookAppointment(Appointment a) {
-        appointments.add(a);
+                //display schedule for those treatments
+            }
+        }
     }
+
+    public void bookAppointment(Patient patient, Therapist therapist, String treatmentName){
+        // initialize appointment
+        Appointment appointment = new Appointment(patient, therapist, treatmentName);
+        //book appointment
+        appointment.book(patient);
+        //add to list
+        appointments.add(appointment);
+    }
+
+
+    public void cancelAppointment(Appointment app){
+        for(Appointment appointment : appointments){
+            if (appointment.equals(app)){
+                app.cancel();
+            }
+        }
+    }
+
+    public void attendAppointment(Appointment app){
+        for(Appointment appointment : appointments){
+            if (appointment.equals(app)){
+                app.attend();
+            }
+        }
+    }
+
 
     public void getAllAppointments(){
 

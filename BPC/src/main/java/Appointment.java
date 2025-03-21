@@ -5,17 +5,17 @@ import java.util.UUID;
 public class Appointment {
     private Patient patient;
     private Therapist therapist;
-    private int time;
+//    private int time;
     private String status;
     private String bookingId;
     private String treatmentName;
 
-    public Appointment(Patient patient, Therapist therapist, String treatmentName, int time) {
+    public Appointment(Patient patient, Therapist therapist, String treatmentName) {
         this.patient = patient;
         this.therapist = therapist;
         this.status = "Available";
         this.treatmentName = treatmentName;
-        this.time = time;
+//        this.time = time;
         this.bookingId = null;
     }
 
@@ -41,9 +41,9 @@ public class Appointment {
         return treatments;
     }
 
-    public int getAppointmentTime(){
-        return time;
-    }
+//    public int getAppointmentTime(){
+//        return time;
+//    }
 
     public void book(Patient patient) {
         this.patient = patient;
@@ -63,6 +63,28 @@ public class Appointment {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getTreatmentName() {
+        return treatmentName;
+    }
+
+    public String toString() {
+        if(status.equals("Available")){
+            return "****************Available Appointment*******************";
+        }
+        else if(status.equals("Booked")){
+            return "****Your Appointment has been booked******";
+        }
+        else if(status.equals("Cancelled")){
+            return "****Your Appointment has been cancelled******";
+        }
+        else if(status.equals("Attended")){
+            return "****Your Appointment has been attended******";
+        }
+        else{
+            return "***Appointment***";
+        }
     }
 
 }

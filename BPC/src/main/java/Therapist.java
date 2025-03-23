@@ -1,5 +1,8 @@
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Therapist extends Member{
@@ -11,8 +14,7 @@ public class Therapist extends Member{
         super(firstName, lastName);
         expertise = new ArrayList<String>();
         calendar = new ArrayList<>();
-        initializeExpertiseTreatments();
-//        generateSchedule();
+        initializeExpertiseTreatments();;
     }
 
     public Therapist(String firstName, String lastName, String address, String phone){
@@ -119,23 +121,38 @@ public class Therapist extends Member{
     }
 
     public void generateSchedule() {
-        LocalTime startTime = LocalTime.of(10, 0); // Start at 10 AM
-        LocalTime endTime = LocalTime.of(16, 0);  // End at 4 PM
+        LocalDate startDate = LocalDate.now(); // Get current date
+        DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEE"); // Formats to "Mon", "Tue", etc.
         Random random = new Random();
-
         List<String> allTreatments = getAllTreatments();
         if (allTreatments.isEmpty()) return;
 
-        while (startTime.isBefore(endTime)) {
-            String randomTreatment = allTreatments.get(random.nextInt(allTreatments.size()));
-            LocalDateTime slotTime = LocalDateTime.now().with(startTime);
+        for (int week = 0; week < 4; week++) { // 4-week schedule
+            for (int dayOffset = 0; dayOffset < 5; dayOffset++) { // Monday to Friday
+                // Calculate the specific day
+                LocalDate appointmentDate = startDate.with(DayOfWeek.MONDAY).plusWeeks(week).plusDays(dayOffset);
+                String dayOfWeek = appointmentDate.format(dayFormatter); // e.g., "Mon", "Tue"
 
-            Appointment newAppointment = new Appointment(this, randomTreatment, slotTime);
-            calendar.add(newAppointment); // Store in therapist's calendar
+                LocalTime startTime = LocalTime.of(10, 0); // Start at 10 AM
+                LocalTime endTime = LocalTime.of(17, 0);  // End at 4 PM
 
-            startTime = startTime.plusHours(1); // Move to next hour
+                while (startTime.isBefore(endTime)) {
+                    String randomTreatment = allTreatments.get(random.nextInt(allTreatments.size()));
+
+                    // Format slot time: "Week 1, Mon, 10:00"
+                    String slotTime = "Week " + (week + 1) + ", " + dayOfWeek + ", " + startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+                    // Create the appointment and add it to the therapist's calendar
+                    Appointment therapistSchedule = new Appointment(this, randomTreatment, slotTime);
+                    calendar.add(therapistSchedule);
+
+                    startTime = startTime.plusHours(1); // Move to the next hour
+                }
+            }
         }
     }
+
+
 
 
 

@@ -12,12 +12,12 @@ public class Appointment {
     private String bookingId;
     private String treatmentName;
 
-    public Appointment( Therapist therapist, String treatmentName, LocalDateTime appointmentTime) {
+    public Appointment( Therapist therapist, String treatmentName, String day) {
         this.therapist = therapist;
         this.status = "Available";
         this.treatmentName = treatmentName;
-        this.time = appointmentTime.getHour();
-        this.day = appointmentTime.getDayOfWeek().toString();
+//        this.time = appointmentTime.getHour();
+        this.day = day;
         this.bookingId = null;
     }
 
@@ -76,7 +76,7 @@ public class Appointment {
             return "\n****************Available Appointment*******************" +
                     "\ntherapist: Dr " + therapist.getLastName() +
                     "\ntreatment: " + treatmentName  +
-                    "\ntime: " + time +
+                    "\ntime: " + day +
                     "\nstatus: " + status ;
         }
         else if(status.equals("Booked")){
@@ -84,7 +84,7 @@ public class Appointment {
                     "\ntherapist: Dr" + therapist.getLastName() +
                     "patient:" + patient.getLastName() + patient.getFirstName() + '\'' +
                     "treatment: " + treatmentName + '\'' +
-                    "\ntime: " + day + time +
+                    "\ntime: " + day +
                     "\nstatus: " + status + '\'' ;
         }
         else if(status.equals("Cancelled")){

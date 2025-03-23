@@ -12,6 +12,7 @@ public class Therapist extends Member{
         expertise = new ArrayList<String>();
         calendar = new ArrayList<>();
         initializeExpertiseTreatments();
+//        generateSchedule();
     }
 
     public Therapist(String firstName, String lastName, String address, String phone){
@@ -61,6 +62,10 @@ public class Therapist extends Member{
     public void addExpertise(String doctorExpertise) {
         if (expertiseTreatments.containsKey(doctorExpertise.toLowerCase())) {
             expertise.add(doctorExpertise.toLowerCase());
+            // Clear the existing calendar to avoid duplicate appointments
+            calendar.clear();
+            // Regenerate the schedule with the updated expertise
+            generateSchedule();
         } else {
             throw new IllegalArgumentException("Invalid expertise: " + doctorExpertise);
         }

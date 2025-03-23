@@ -5,7 +5,9 @@ import java.util.UUID;
 public class Appointment {
     private Patient patient;
     private Therapist therapist;
-    private LocalDateTime time;
+//    private LocalDateTime time;
+    private int time;
+    private String day;
     private String status;
     private String bookingId;
     private String treatmentName;
@@ -14,7 +16,8 @@ public class Appointment {
         this.therapist = therapist;
         this.status = "Available";
         this.treatmentName = treatmentName;
-        this.time = appointmentTime;
+        this.time = appointmentTime.getHour();
+        this.day = appointmentTime.getDayOfWeek().toString();
         this.bookingId = null;
     }
 
@@ -40,7 +43,7 @@ public class Appointment {
         return treatments;
     }
 
-//    public int getAppointmentTime(){
+//    public LocalDateTime getAppointmentTime(){
 //        return time;
 //    }
 
@@ -70,10 +73,19 @@ public class Appointment {
 
     public String toString() {
         if(status.equals("Available")){
-            return "****************Available Appointment*******************";
+            return "\n****************Available Appointment*******************" +
+                    "\ntherapist: Dr " + therapist.getLastName() +
+                    "\ntreatment: " + treatmentName  +
+                    "\ntime: " + time +
+                    "\nstatus: " + status ;
         }
         else if(status.equals("Booked")){
-            return "****Your Appointment has been booked******";
+            return "****Your Appointment has been booked******" +
+                    "\ntherapist: Dr" + therapist.getLastName() +
+                    "patient:" + patient.getLastName() + patient.getFirstName() + '\'' +
+                    "treatment: " + treatmentName + '\'' +
+                    "\ntime: " + day + time +
+                    "\nstatus: " + status + '\'' ;
         }
         else if(status.equals("Cancelled")){
             return "****Your Appointment has been cancelled******";

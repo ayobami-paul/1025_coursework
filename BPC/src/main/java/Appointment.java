@@ -5,17 +5,16 @@ import java.util.UUID;
 public class Appointment {
     private Patient patient;
     private Therapist therapist;
-//    private int time;
+    private LocalDateTime time;
     private String status;
     private String bookingId;
     private String treatmentName;
 
-    public Appointment(Patient patient, Therapist therapist, String treatmentName) {
-        this.patient = patient;
+    public Appointment( Therapist therapist, String treatmentName, LocalDateTime appointmentTime) {
         this.therapist = therapist;
         this.status = "Available";
         this.treatmentName = treatmentName;
-//        this.time = time;
+        this.time = appointmentTime;
         this.bookingId = null;
     }
 

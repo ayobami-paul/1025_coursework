@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Clinic {
@@ -84,9 +85,9 @@ public class Clinic {
         }
     }
 
-    public void bookAppointment(Patient patient, Therapist therapist, String treatmentName){
+    public void bookAppointment(Patient patient, Therapist therapist, String treatmentName, LocalDateTime appointmentTime){
         // initialize appointment
-        Appointment appointment = new Appointment(patient, therapist, treatmentName);
+        Appointment appointment = new Appointment(therapist, treatmentName, appointmentTime);
         //book appointment
         appointment.book(patient);
         //add to list

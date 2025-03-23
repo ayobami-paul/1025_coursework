@@ -1,17 +1,16 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 public class Therapist extends Member{
     private List<String> expertise;
-    private List<Appointment> appointments;
+    private List<Appointment> calendar;
     private Map<String, List<String>> expertiseTreatments;
 
     public Therapist(String firstName, String lastName){
         super(firstName, lastName);
         expertise = new ArrayList<String>();
-        appointments = new ArrayList<>();
+        calendar = new ArrayList<>();
         initializeExpertiseTreatments();
     }
 
@@ -107,12 +106,32 @@ public class Therapist extends Member{
 
 
     public void addAppointment(Appointment appointment) {
-        appointments.add(appointment);
+        calendar.add(appointment);
     }
 
-    public List<Appointment> getAppointments(){
-        return appointments;
+    public List<Appointment> getCalendar(){
+        return calendar;
     }
+
+    public void generateSchedule() {
+        LocalTime startTime = LocalTime.of(10, 0); // Start at 10 AM
+        LocalTime endTime = LocalTime.of(16, 0);  // End at 4 PM
+        Random random = new Random();
+
+        List<String> allTreatments = getAllTreatments();
+        if (allTreatments.isEmpty()) return;
+
+        while (startTime.isBefore(endTime)) {
+            String randomTreatment = allTreatments.get(random.nextInt(allTreatments.size()));
+            LocalDateTime slotTime = LocalDateTime.now().with(startTime);
+
+            Appointment newAppointment = new Appointment(this, randomTreatment, slotTime);
+            calendar.add(newAppointment); // Store in therapist's calendar
+
+            startTime = startTime.plusHours(1); // Move to next hour
+        }
+    }
+
 
 
     public String toString(){

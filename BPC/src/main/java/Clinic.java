@@ -85,7 +85,7 @@ public class Clinic {
         }
     }
 
-    public void bookAppointment(Patient patient, Therapist therapist, String treatmentName, LocalDateTime appointmentTime){
+    public void bookAppointment(Patient patient, Therapist therapist, String treatmentName, String appointmentTime){
         // initialize appointment
         Appointment appointment = new Appointment(therapist, treatmentName, appointmentTime);
         //book appointment
@@ -95,18 +95,18 @@ public class Clinic {
     }
 
 
-    public void cancelAppointment(Appointment app){
+    public void cancelAppointment(String bookingId){
         for(Appointment appointment : appointments){
-            if (appointment.equals(app)){
-                app.cancel();
+            if (appointment.getBookingId().equals(bookingId)){
+                appointment.cancel();
             }
         }
     }
 
-    public void attendAppointment(Appointment app){
+    public void attendAppointment(String bookingId){
         for(Appointment appointment : appointments){
-            if (appointment.equals(app)){
-                app.attend();
+            if (appointment.getBookingId().equals(bookingId)){
+                appointment.attend();
             }
         }
     }

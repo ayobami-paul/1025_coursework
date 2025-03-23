@@ -16,6 +16,10 @@ public class Main {
 
         t2.addExpertise("Physiotherapy");
 
-        System.out.println(t1.getCalendar());
+        c1.addTherapist(t1);
+
+//        System.out.println(t1.getCalendar());
+//        System.out.println(t1.getCalendarByExpertise("osteopathy"));
+        c1.searchByExpertise("Physiotherapy");
     }
 }

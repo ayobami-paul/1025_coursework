@@ -61,14 +61,7 @@ public class Clinic {
     public void searchByExpertise(String expertise) {
         for (Therapist therapist : therapists) {
             if (therapist.getExpertise().contains(expertise)) {
-                //display all therapists names
-                therapist.getFirstName();
-                therapist.getLastName();
-
-                //display all treatments
-                therapist.getAllTreatments();
-                //display schedule for those treatments
-
+                System.out.println(therapist.getCalendarByExpertise(expertise));
             }
         }
     }

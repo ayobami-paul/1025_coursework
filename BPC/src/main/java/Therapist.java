@@ -120,6 +120,28 @@ public class Therapist extends Member{
         return calendar;
     }
 
+    public List<Appointment> getCalendarByExpertise(String expertise) {
+        List<Appointment> filteredCalendar = new ArrayList<>();
+
+        // Get the list of treatments for the given expertise
+        List<String> treatmentsForExpertise = expertiseTreatments.get(expertise.toLowerCase());
+
+        // If no treatments are found for the expertise, return an empty list
+        if (treatmentsForExpertise == null || treatmentsForExpertise.isEmpty()) {
+            System.out.println("No treatments found for expertise: " + expertise);
+            return filteredCalendar;
+        }
+
+        // Filter the calendar to include only appointments with treatments for the given expertise
+        for (Appointment appointment : calendar) {
+            if (treatmentsForExpertise.contains(appointment.getTreatmentName())) {
+                filteredCalendar.add(appointment);
+            }
+        }
+
+        return filteredCalendar;
+    }
+
     public void generateSchedule() {
         LocalDate startDate = LocalDate.now(); // Get current date
         DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEE"); // Formats to "Mon", "Tue", etc.

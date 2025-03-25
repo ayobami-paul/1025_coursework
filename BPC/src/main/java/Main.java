@@ -10,16 +10,5 @@ public class Main {
 
         Patient p1 = new Patient( "paul","Chalamet");
         Patient p2 = new Patient( "frank","Tome");
-
-        t1.addExpertise("Physiotherapy");
-        t1.addExpertise("Osteopathy");
-
-        t2.addExpertise("Physiotherapy");
-
-        c1.addTherapist(t1);
-
-//        System.out.println(t1.getCalendar());
-//        System.out.println(t1.getCalendarByExpertise("osteopathy"));
-        c1.searchByExpertise("Physiotherapy");
     }
 }

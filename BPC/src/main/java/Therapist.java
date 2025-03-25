@@ -14,14 +14,8 @@ public class Therapist extends Member{
         super(firstName, lastName);
         expertise = new ArrayList<String>();
         calendar = new ArrayList<>();
-        initializeExpertiseTreatments();;
+        initializeExpertiseTreatments();
     }
-
-    public Therapist(String firstName, String lastName, String address, String phone){
-        super(firstName, lastName,address,phone);
-        expertise = new ArrayList<String>();
-    }
-
 
     private void initializeExpertiseTreatments() {
         expertiseTreatments = new HashMap<>();
@@ -111,7 +105,7 @@ public class Therapist extends Member{
         return treatmentName;
     }
 
-
+    //not needed I think
     public void addAppointment(Appointment appointment) {
         calendar.add(appointment);
     }
@@ -178,7 +172,10 @@ public class Therapist extends Member{
 
 
 
-    public String toString(){
-        return "*********Physiotherapist Information*********" + super.toString();
+    public String getTherapistDetails(){
+        return "*********Physiotherapist Information*********"  +
+                "\nID: " + getTherapistId() +
+                "\nName: " + super.getFirstName() + " " + super.getLastName() +
+                "\n";
     }
 }

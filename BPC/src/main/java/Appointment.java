@@ -12,7 +12,7 @@ public class Appointment {
     private String bookingId;
     private String treatmentName;
 
-    public Appointment( Therapist therapist, String treatmentName, String day) {
+    public Appointment(Therapist therapist, String treatmentName, String day) {
         this.therapist = therapist;
         this.status = "Available";
         this.treatmentName = treatmentName;

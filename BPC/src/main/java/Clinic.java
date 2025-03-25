@@ -60,6 +60,7 @@ public class Clinic {
 
     public void searchByExpertise(String expertise) {
         for (Therapist therapist : therapists) {
+//            System.out.println(therapist.getExpertise());
             if (therapist.getExpertise().contains(expertise)) {
                 System.out.println(therapist.getCalendarByExpertise(expertise));
             }

@@ -4,15 +4,17 @@ public class Patient extends Member{
         super(firstName, lastName);
     }
 
-    public Patient(String firstName, String lastName, String address, String phone){
-        super(firstName, lastName,address,phone);
-    }
-
     public String getPatientId(){
         return super.getId();
     }
 
-    public String toString(){
-        return "*********Patient Information*********" + super.toString();
+    // format the detail output to patient spec
+    public String getPatientDetail(){
+        return "*********Patient Information*********" +
+                "\nID: " + getPatientId() +
+                "\nName: " + super.getFirstName() + " " + super.getLastName() +
+                "\nAddress: " + super.getAddress() +
+                "\nPhone Number: " + super.getPhone() +
+                "\n";
     }
 }

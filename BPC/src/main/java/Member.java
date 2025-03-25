@@ -6,19 +6,14 @@ public class Member {
     private String lastName;
     private String address;
     private String phone;
+    public static String notAvailable = "Not available";
 
     public Member(String firstName, String lastName){
         this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public Member(String firstName, String lastName, String address, String phone){
-        this.id = UUID.randomUUID().toString();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
+        this.address = notAvailable;
+        this.phone = notAvailable;
     }
 
     public String getId() {
@@ -33,21 +28,20 @@ public class Member {
         return this.lastName;
     }
 
-    public String toString(){
+    public void addAddress(String address){
+        this.address = address;
+    }
 
-        if(address == null && phone == null){
-            return "\nID: " + id +
-                    "\nName: " + firstName + " " + lastName;
-        }
+    public String getAddress() {
+        return this.address;
+    }
 
-        String place = (address == null) ? "Not available" : address;
-        String number = (phone == null) ? "Not available" : phone;
+    public void addPhone(String phone){
+        this.phone = phone;
+    }
 
-        return "\nID: " + id +
-                "\nName: " + firstName + " " + lastName +
-                "\nAddress: " + place +
-                "\nPhone Number: " + number +
-                "\n";
+    public String getPhone() {
+        return this.phone;
     }
 
 }

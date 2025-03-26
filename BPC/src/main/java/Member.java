@@ -1,6 +1,6 @@
 import java.util.UUID;
 
-public class Member {
+public abstract class Member {
     private String id;
     private String firstName;
     private String lastName;

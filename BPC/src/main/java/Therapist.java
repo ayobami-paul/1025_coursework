@@ -114,8 +114,13 @@ public class Therapist extends Member{
         return calendar;
     }
 
-    public List<Appointment> getCalendarByExpertise(String expertise) {
-        List<Appointment> filteredCalendar = new ArrayList<>();
+    public String getCalendar1(){
+        return calendar.toString();
+    }
+
+    public String getCalendarByExpertise(String expertise) {
+//        List<Appointment> filteredCalendar = new ArrayList<>();
+        String filteredCalendar = "";
 
         // Get the list of treatments for the given expertise
         List<String> treatmentsForExpertise = expertiseTreatments.get(expertise.toLowerCase());
@@ -129,7 +134,8 @@ public class Therapist extends Member{
         // Filter the calendar to include only appointments with treatments for the given expertise
         for (Appointment appointment : calendar) {
             if (treatmentsForExpertise.contains(appointment.getTreatmentName())) {
-                filteredCalendar.add(appointment);
+//                filteredCalendar.add(appointment);
+                filteredCalendar += appointment;
             }
         }
 
@@ -143,23 +149,24 @@ public class Therapist extends Member{
         List<String> allTreatments = getAllTreatments();
         if (allTreatments.isEmpty()) return;
 
-        for (int week = 0; week < 4; week++) { // 4-week schedule
-            for (int dayOffset = 0; dayOffset < 5; dayOffset++) { // Monday to Friday
+        for (int week = 0; week < 1; week++) { // 4-week schedule
+            for (int dayOffset = 0; dayOffset < 2; dayOffset++) { // Monday to Friday
                 // Calculate the specific day
                 LocalDate appointmentDate = startDate.with(DayOfWeek.MONDAY).plusWeeks(week).plusDays(dayOffset);
                 String dayOfWeek = appointmentDate.format(dayFormatter); // e.g., "Mon", "Tue"
 
                 LocalTime startTime = LocalTime.of(10, 0); // Start at 10 AM
-                LocalTime endTime = LocalTime.of(17, 0);  // End at 4 PM
+                LocalTime endTime = LocalTime.of(12, 0);  // End at 4 PM
 
                 while (startTime.isBefore(endTime)) {
                     String randomTreatment = allTreatments.get(random.nextInt(allTreatments.size()));
 
                     // Format slot time: "Week 1, Mon, 10:00"
                     String slotTime = "Week " + (week + 1) + ", " + dayOfWeek + ", " + startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+                    String apptId = this.getLastName() + "-W"+ (week+1) + dayOfWeek + "-" + startTime.getHour();
 
                     // Create the appointment and add it to the therapist's calendar
-                    Appointment therapistSchedule = new Appointment(this, randomTreatment, slotTime);
+                    Appointment therapistSchedule = new Appointment(apptId,this, randomTreatment, slotTime);
                     calendar.add(therapistSchedule);
 
                     startTime = startTime.plusHours(1); // Move to the next hour
@@ -168,14 +175,11 @@ public class Therapist extends Member{
         }
     }
 
-
-
-
-
     public String getTherapistDetails(){
         return "*********Physiotherapist Information*********"  +
                 "\nID: " + getTherapistId() +
                 "\nName: " + super.getFirstName() + " " + super.getLastName() +
+                "\nExpertise: " + getExpertise() +
                 "\n";
     }
 }

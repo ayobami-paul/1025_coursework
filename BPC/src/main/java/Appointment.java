@@ -1,23 +1,20 @@
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 public class Appointment {
     private Patient patient;
     private Therapist therapist;
-//    private LocalDateTime time;
-    private int time;
-    private String day;
+    private String appointmentId;
+    private String time;
     private String status;
     private String bookingId;
     private String treatmentName;
 
-    public Appointment(Therapist therapist, String treatmentName, String day) {
+    public Appointment(String appointmentId, Therapist therapist, String treatmentName, String time) {
+        this.appointmentId = appointmentId;
         this.therapist = therapist;
         this.status = "Available";
         this.treatmentName = treatmentName;
-//        this.time = appointmentTime.getHour();
-        this.day = day;
+        this.time = time;
         this.bookingId = null;
     }
 
@@ -29,8 +26,8 @@ public class Appointment {
         return therapist;
     }
 
-    public String getBookingId(){
-        return bookingId;
+    public String getAppointmentId() {
+        return appointmentId;
     }
 
     // this method seems redundant
@@ -49,13 +46,11 @@ public class Appointment {
 
     public void book(Patient patient) {
         this.patient = patient;
-        this.bookingId = UUID.randomUUID().toString();
         this.status = "Booked";
     }
 
     public void cancel(){
         this.patient = null;
-        this.bookingId = null;
         this.status = "Cancelled";
     }
 
@@ -72,30 +67,37 @@ public class Appointment {
     }
 
     public String toString() {
-        if(status.equals("Available")){
-            return "\n****************Available Appointment*******************" +
+//        if(status.equals("Available")){
+//            return "\n****************Available Appointment*******************" +
+//                    "\nAppointmentID: " + appointmentId +
+//                    "\ntherapist: Dr " + therapist.getLastName() +
+//                    "\ntreatment: " + treatmentName  +
+//                    "\ntime: " + time +
+//                    "\nstatus: " + status ;
+//        }
+//        else if(status.equals("Booked")){
+//            return "****Your Appointment has been booked******" +
+//                    "\ntherapist: Dr" + therapist.getLastName() +
+//                    "patient:" + patient.getLastName() + patient.getFirstName() + '\'' +
+//                    "treatment: " + treatmentName + '\'' +
+//                    "\ntime: " + time +
+//                    "\nstatus: " + status + '\'' ;
+//        }
+//        else if(status.equals("Cancelled")){
+//            return "****Your Appointment has been cancelled******";
+//        }
+//        else if(status.equals("Attended")){
+//            return "****Your Appointment has been attended******";
+//        }
+//        else{
+//            return "***Appointment***";
+//        }
+        return "\n****************Appointments*******************" +
+                    "\nAppointmentID: " + appointmentId +
                     "\ntherapist: Dr " + therapist.getLastName() +
                     "\ntreatment: " + treatmentName  +
-                    "\ntime: " + day +
+                    "\ntime: " + time +
                     "\nstatus: " + status ;
-        }
-        else if(status.equals("Booked")){
-            return "****Your Appointment has been booked******" +
-                    "\ntherapist: Dr" + therapist.getLastName() +
-                    "patient:" + patient.getLastName() + patient.getFirstName() + '\'' +
-                    "treatment: " + treatmentName + '\'' +
-                    "\ntime: " + day +
-                    "\nstatus: " + status + '\'' ;
-        }
-        else if(status.equals("Cancelled")){
-            return "****Your Appointment has been cancelled******";
-        }
-        else if(status.equals("Attended")){
-            return "****Your Appointment has been attended******";
-        }
-        else{
-            return "***Appointment***";
-        }
     }
 
 }

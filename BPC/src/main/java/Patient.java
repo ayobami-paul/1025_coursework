@@ -8,7 +8,7 @@ public class Patient extends Member{
         return super.getId();
     }
 
-    // format the detail output to patient spec
+
     public String getPatientDetail(){
         return "*********Patient Information*********" +
                 "\nID: " + getPatientId() +

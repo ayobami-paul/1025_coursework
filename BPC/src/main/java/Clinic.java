@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Clinic {
@@ -72,7 +74,7 @@ public class Clinic {
     }
 
     public List<List<Appointment>> getClinicCalendar(){
-        List<List<Appointment>> clinicCalendar = new ArrayList<List<Appointment>>();
+        List<List<Appointment>> clinicCalendar = new ArrayList<>();
         for (Therapist t : therapists) {
             clinicCalendar.add(t.getCalendar());
         }
@@ -89,9 +91,12 @@ public class Clinic {
 
     public void searchByExpertise(String expertise) {
         for (Therapist therapist : therapists) {
-//            System.out.println(therapist.getExpertise());
             if (therapist.getExpertise().contains(expertise.toLowerCase())) {
-                System.out.println(therapist.getCalendarByExpertise(expertise));
+                for(Appointment appointment : therapist.getCalendarByExpertise(expertise)){
+                    if(appointment.getStatus().equalsIgnoreCase("available")){
+                        System.out.println(appointment);
+                    }
+                }
             }
         }
     }
@@ -99,11 +104,11 @@ public class Clinic {
     public void searchByTherapist(String name) {
         for (Therapist therapist : therapists){
             if(therapist.getFirstName().equalsIgnoreCase(name) || therapist.getLastName().equalsIgnoreCase(name)) {
-                //display all treatments
-                System.out.println(therapist.getCalendar());
-//                System.out.println(therapist.getAllTreatments());
-
-                //display schedule for those treatments
+                for(Appointment appointment : therapist.getCalendar()){
+                    if(appointment.getStatus().equalsIgnoreCase("available")){
+                        System.out.println(appointment);
+                    }
+                }
             }
         }
     }
@@ -112,9 +117,7 @@ public class Clinic {
         for (List<Appointment> appointments : getClinicCalendar()) {
             for (Appointment appointment : appointments) {
                 if(appointment.getAppointmentId().equalsIgnoreCase(appointmentID)){
-                    System.out.println(appointment);
                     appointment.book(patient);
-                    System.out.println(appointment);
                     bookedAppointments.add(appointment);
                 }
             }
@@ -126,6 +129,8 @@ public class Clinic {
         for(Appointment appointment : bookedAppointments){
             if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID)){
                 appointment.cancel();
+            } else{
+                System.out.println("Appointment not found");
             }
         }
     }
@@ -134,12 +139,44 @@ public class Clinic {
         for(Appointment appointment : bookedAppointments){
             if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID)){
                 appointment.attend();
+            } else {
+                System.out.println("Appointment not found");
             }
         }
     }
 
+    public int getAttendedCount(Therapist therapist){
+        int attendedCount = 0;
+        for(Appointment appointment : bookedAppointments){
+            if(appointment.getTherapist().equals(therapist) && appointment.getStatus().equalsIgnoreCase("Attended")){
+                attendedCount++;
+            }
+        }
+        return attendedCount;
+    }
+
 
     public void getAllAppointments(){
-
+        System.out.println("\n********All Appointments*********");
+        for(Appointment appointment: bookedAppointments){
+            System.out.println(appointment);
+        }
     }
+
+    public void getAppointmentReport(){
+        // sort therapist in descending order by attended count
+        therapists.sort((t1, t2) -> Integer.compare(getAttendedCount(t2), getAttendedCount(t1)));
+
+        for (Therapist therapist : therapists) {
+            System.out.println(therapist.getLastName() + " - Attended Appointments: " + getAttendedCount(therapist));
+
+            for (Appointment appointment : bookedAppointments) {
+                if (appointment.getTherapist().equals(therapist) && appointment.getStatus().equalsIgnoreCase("Attended")) {
+                    System.out.println(appointment);
+                }
+            }
+
+        }
+    }
+
 }

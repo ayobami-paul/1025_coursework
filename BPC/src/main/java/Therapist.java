@@ -118,9 +118,9 @@ public class Therapist extends Member{
         return calendar.toString();
     }
 
-    public String getCalendarByExpertise(String expertise) {
-//        List<Appointment> filteredCalendar = new ArrayList<>();
-        String filteredCalendar = "";
+    public List<Appointment> getCalendarByExpertise(String expertise) {
+        List<Appointment> filteredCalendar = new ArrayList<>();
+//        String filteredCalendar = "";
 
         // Get the list of treatments for the given expertise
         List<String> treatmentsForExpertise = expertiseTreatments.get(expertise.toLowerCase());
@@ -134,8 +134,8 @@ public class Therapist extends Member{
         // Filter the calendar to include only appointments with treatments for the given expertise
         for (Appointment appointment : calendar) {
             if (treatmentsForExpertise.contains(appointment.getTreatmentName())) {
-//                filteredCalendar.add(appointment);
-                filteredCalendar += appointment;
+                filteredCalendar.add(appointment);
+//                filteredCalendar += appointment;
             }
         }
 

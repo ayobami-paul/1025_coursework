@@ -67,37 +67,22 @@ public class Appointment {
     }
 
     public String toString() {
-//        if(status.equals("Available")){
-//            return "\n****************Available Appointment*******************" +
-//                    "\nAppointmentID: " + appointmentId +
-//                    "\ntherapist: Dr " + therapist.getLastName() +
-//                    "\ntreatment: " + treatmentName  +
-//                    "\ntime: " + time +
-//                    "\nstatus: " + status ;
-//        }
-//        else if(status.equals("Booked")){
-//            return "****Your Appointment has been booked******" +
-//                    "\ntherapist: Dr" + therapist.getLastName() +
-//                    "patient:" + patient.getLastName() + patient.getFirstName() + '\'' +
-//                    "treatment: " + treatmentName + '\'' +
-//                    "\ntime: " + time +
-//                    "\nstatus: " + status + '\'' ;
-//        }
-//        else if(status.equals("Cancelled")){
-//            return "****Your Appointment has been cancelled******";
-//        }
-//        else if(status.equals("Attended")){
-//            return "****Your Appointment has been attended******";
-//        }
-//        else{
-//            return "***Appointment***";
-//        }
-        return "\n****************Appointments*******************" +
+        if(status.equals("Available")){
+            return "\n********Available Appointment********" +
                     "\nAppointmentID: " + appointmentId +
                     "\ntherapist: Dr " + therapist.getLastName() +
                     "\ntreatment: " + treatmentName  +
                     "\ntime: " + time +
                     "\nstatus: " + status ;
+        }
+        else {
+            return "****Appointment****" +
+                    "\nAppointmentID: " + appointmentId +
+                    "\ntherapist: Dr " + therapist.getLastName() +
+                    "\npatient: " + patient.getLastName() + " " + patient.getFirstName() +
+                    "\ntreatment: " + treatmentName +
+                    "\ntime: " + time +
+                    "\nstatus: " + status ;
+        }
     }
-
 }

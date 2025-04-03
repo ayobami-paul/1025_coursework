@@ -10,10 +10,13 @@ public class Main {
 
 //        c1.getAllTherapists();
 //        c1.searchByExpertise("osteopathy");
-//        c1.searchByTherapist("dylan");
+        c1.searchByTherapist("dylan");
 //        c1.getClinicCalendar1();
         c1.bookAppointment(p1,"dylan-W1Mon-11");
 //        c1.searchByTherapist("dylan");
+        c1.getAllAppointments();
+
+        c1.searchByTherapist("dylan");
 
     }
 }

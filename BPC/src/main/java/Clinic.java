@@ -54,10 +54,21 @@ public class Clinic {
     public void removePatient(Patient p) {
         if(patients.contains(p)) {
             patients.remove(p);
+            System.out.println("Patient removed");
         } else {
             System.out.println("Patient not found");
         }
     }
+
+    public Patient findPatientByName(String firstName, String lastName) {
+        for (Patient p : patients) {
+            if (p.getFirstName().equalsIgnoreCase(firstName) && p.getLastName().equalsIgnoreCase(lastName)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 
     public void getAllPatients() {
         for (int i = 0; i < patients.size(); i++) {
@@ -119,6 +130,7 @@ public class Clinic {
                 if(appointment.getAppointmentId().equalsIgnoreCase(appointmentID)){
                     appointment.book(patient);
                     bookedAppointments.add(appointment);
+                    System.out.println("Appointment booked");
                 }
             }
         }
@@ -127,8 +139,9 @@ public class Clinic {
 
     public void cancelAppointment(String appointmentID){
         for(Appointment appointment : bookedAppointments){
-            if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID)){
+            if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID) && appointment.getStatus().equalsIgnoreCase("Booked")){
                 appointment.cancel();
+                System.out.println("Appointment Cancelled");
             } else{
                 System.out.println("Appointment not found");
             }
@@ -137,8 +150,9 @@ public class Clinic {
 
     public void attendAppointment(String appointmentID){
         for(Appointment appointment : bookedAppointments){
-            if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID)){
+            if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID) && appointment.getStatus().equalsIgnoreCase("Booked")){
                 appointment.attend();
+                System.out.println("Appointment Marked as attended");
             } else {
                 System.out.println("Appointment not found");
             }
@@ -157,7 +171,7 @@ public class Clinic {
 
 
     public void getAllAppointments(){
-        System.out.println("\n********All Appointments*********");
+        System.out.println("\n********All Appointments Report*********");
         for(Appointment appointment: bookedAppointments){
             System.out.println(appointment);
         }
@@ -167,8 +181,10 @@ public class Clinic {
         // sort therapist in descending order by attended count
         therapists.sort((t1, t2) -> Integer.compare(getAttendedCount(t2), getAttendedCount(t1)));
 
+        System.out.println("\n*************Report for All Attended Appointments*******************");
+
         for (Therapist therapist : therapists) {
-            System.out.println(therapist.getLastName() + " - Attended Appointments: " + getAttendedCount(therapist));
+            System.out.println("\n"+ therapist.getLastName() + " - Attended Appointments: " + getAttendedCount(therapist));
 
             for (Appointment appointment : bookedAppointments) {
                 if (appointment.getTherapist().equals(therapist) && appointment.getStatus().equalsIgnoreCase("Attended")) {

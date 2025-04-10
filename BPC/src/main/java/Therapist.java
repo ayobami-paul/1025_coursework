@@ -150,13 +150,13 @@ public class Therapist extends Member{
         if (allTreatments.isEmpty()) return;
 
         for (int week = 0; week < 1; week++) { // 4-week schedule
-            for (int dayOffset = 0; dayOffset < 2; dayOffset++) { // Monday to Friday
+            for (int dayOffset = 0; dayOffset < 3; dayOffset++) { // Monday to Friday
                 // Calculate the specific day
                 LocalDate appointmentDate = startDate.with(DayOfWeek.MONDAY).plusWeeks(week).plusDays(dayOffset);
                 String dayOfWeek = appointmentDate.format(dayFormatter); // e.g., "Mon", "Tue"
 
                 LocalTime startTime = LocalTime.of(10, 0); // Start at 10 AM
-                LocalTime endTime = LocalTime.of(12, 0);  // End at 4 PM
+                LocalTime endTime = LocalTime.of(13, 0);  // End at 4 PM
 
                 while (startTime.isBefore(endTime)) {
                     String randomTreatment = allTreatments.get(random.nextInt(allTreatments.size()));
@@ -177,7 +177,7 @@ public class Therapist extends Member{
 
     public String getTherapistDetails(){
         return "*********Physiotherapist Information*********"  +
-                "\nID: " + getTherapistId() +
+//                "\nID: " + getTherapistId() +
                 "\nName: " + super.getFirstName() + " " + super.getLastName() +
                 "\nExpertise: " + getExpertise() +
                 "\n";

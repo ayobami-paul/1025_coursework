@@ -8,12 +8,12 @@ public class Main {
         boolean done = false;
 
         while (!done) {
-            System.out.println("=== Boost Physio Clinic Booking System ===");
+            System.out.println("\n=== Boost Physio Clinic Booking System ===");
             System.out.println("1. Add Patient");
             System.out.println("2. Remove Patient");
             System.out.println("3. Book Appointment");
-            System.out.println("4. Change Booking");
-            System.out.println("5. Cancel Booking");
+            System.out.println("4. Change Appointment");
+            System.out.println("5. Cancel Appointment");
             System.out.println("6. Attend Appointment");
             System.out.println("7. Print Report");
             System.out.println("8. Exit");
@@ -23,7 +23,7 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    System.out.print("Enter Full Name: ");
+                    System.out.print("\nEnter First Name: ");
                     String firstName = scanner.nextLine();
                     System.out.print("Enter Last Name: ");
                     String lastName = scanner.nextLine();
@@ -37,19 +37,46 @@ public class Main {
                     newPatient.addPhone(phone);
 
                     clinic.addPatient(newPatient);
+                    System.out.println("Patient Added");
                     break;
 
                 case 2:
-                    System.out.print("Enter Patient name to remove: ");
-                    String removeId = scanner.nextLine();
+                    System.out.println("\nRemove Patient");
 
-//                    for
-                    Patient p ;
-                    clinic.removePatient(p);
+                    System.out.print("Enter Patient First Name: ");
+                    String fName = scanner.nextLine();
+                    System.out.print("Enter Patient Last Name: ");
+                    String lName = scanner.nextLine();
+
+                    Patient patientToRemove = clinic.findPatientByName(fName, lName);
+
+                    if(patientToRemove == null){
+                        System.out.println("Patient not found! Please register the patient first.");
+                        break;
+                    }
+
+                    clinic.removePatient(patientToRemove);
                     break;
 
                 case 3:
-                    System.out.println("Book Appointment:");
+                    System.out.println("\nBook Appointment");
+
+                    System.out.print("Enter Patient First Name: ");
+                    String pFirstName = scanner.nextLine();
+                    System.out.print("Enter Patient Last Name: ");
+                    String pLastName = scanner.nextLine();
+
+                    Patient foundPatient = clinic.findPatientByName(pFirstName, pLastName);
+
+                    if(foundPatient == null){
+                        System.out.println("Patient not found! Please register the patient first.");
+                        break;
+                    } else {
+                        System.out.println("Patient found");
+                    }
+
+                    clinic.getAllTherapists();
+
                     System.out.println("1. Search by Expertise");
                     System.out.println("2. Search by Physiotherapist Name");
                     int searchOption = scanner.nextInt();
@@ -68,35 +95,50 @@ public class Main {
                         clinic.searchByTherapist(name);
                     }
 
-                    System.out.print("Enter new appointment Id: ");
+                    System.out.print("Enter appointment Id to confirm: ");
                     String appointmentId = scanner.nextLine();
 
-                    clinic.bookAppointment(appointmentId);
+                    clinic.bookAppointment(foundPatient, appointmentId);
+                    break;
 
                 case 4:
+                    System.out.print("\nEnter Patient First Name: ");
+                    String paFirstName = scanner.nextLine();
+                    System.out.print("Enter Patient Last Name: ");
+                    String paLastName = scanner.nextLine();
+
+                    Patient existingPatient = clinic.findPatientByName(paFirstName, paLastName);
+
+                    if(existingPatient == null){
+                        System.out.println("Patient not found! Please register the patient first.");
+                        break;
+                    } else {
+                        System.out.println("Patient found");
+                    }
+
                     System.out.print("Enter previous appointment ID: ");
-                    String bookingId = scanner.nextLine();
+                    String oldAppId = scanner.nextLine();
+                    clinic.cancelAppointment(oldAppId);
 
                     System.out.print("Enter new appointment Id: ");
                     String newAppID = scanner.nextLine();
 
-                    clinic.bookAppointment(newAppID);
+                    clinic.bookAppointment(existingPatient, newAppID);
                     break;
 
                 case 5:
-                    System.out.print("Enter appointment ID to cancel: ");
+                    System.out.print("\nEnter appointment ID to cancel: ");
                     String cancelId = scanner.nextLine();
 
                     clinic.cancelAppointment(cancelId);
                     break;
 
                 case 6:
-                    System.out.print("Enter appointment ID to mark as attended: ");
+                    System.out.print("\nEnter appointment ID to mark as attended: ");
                     String attendId = scanner.nextLine();
 
                     clinic.attendAppointment(attendId);
                     break;
-
 
                 case 7:
                     clinic.getAllAppointments();

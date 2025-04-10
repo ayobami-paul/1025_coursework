@@ -1,13 +1,29 @@
+import org.junit.jupiter.api.BeforeEach;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClinicTest {
+    private Clinic clinic;
+    private Therapist therapist;
+    private Patient patient;
+    private Appointment appointment;
 
-    @org.junit.jupiter.api.Test
-    void addTherapist() {
+    @BeforeEach
+    public void setUp() {
+        clinic = new Clinic();
+
+        therapist = new Therapist("Jonathan", "Devoe");
+        therapist.addExpertise("physiotherapy");
+
+        patient = new Patient("Clark", "Kent");
     }
 
     @org.junit.jupiter.api.Test
-    void removeTherapist() {
+    void testAddTherapist() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void testRemoveTherapist() {
     }
 
     @org.junit.jupiter.api.Test

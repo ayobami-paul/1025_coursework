@@ -75,7 +75,7 @@ public class Main {
                         System.out.println("Patient found");
                     }
 
-                    clinic.getAllTherapists();
+                    clinic.getTherapists();
 
                     System.out.println("1. Search by Expertise");
                     System.out.println("2. Search by Physiotherapist Name");

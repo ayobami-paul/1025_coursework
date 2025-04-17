@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Clinic {
@@ -43,6 +41,10 @@ public class Clinic {
         }
     }
 
+    public List<Therapist> getTherapists() {
+        return therapists;
+    }
+
     public void addPatient(Patient p) {
         if (!patients.contains(p)) {
             patients.add(p);
@@ -69,19 +71,8 @@ public class Clinic {
         return null;
     }
 
-
-    public void getAllPatients() {
-        for (int i = 0; i < patients.size(); i++) {
-            Patient patient = patients.get(i);
-            System.out.println(patient.toString());
-        }
-    }
-
-    public void getAllTherapists() {
-        for (int i = 0; i < therapists.size(); i++) {
-            Therapist therapist = therapists.get(i);
-            System.out.println(therapist.getTherapistDetails());
-        }
+    public List<Patient> getPatients() {
+        return patients;
     }
 
     public List<List<Appointment>> getClinicCalendar(){
@@ -136,6 +127,9 @@ public class Clinic {
         }
     }
 
+    public List<Appointment> getBookedAppointments() {
+        return bookedAppointments;
+    }
 
     public void cancelAppointment(String appointmentID){
         for(Appointment appointment : bookedAppointments){

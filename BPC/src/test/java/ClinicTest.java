@@ -27,7 +27,7 @@ class ClinicTest {
     @org.junit.jupiter.api.Test
     void testAddTherapist() {
         Therapist newTherapist = new Therapist("New", "Therapist");
-        newTherapist.addExpertise("acupuncture");
+        newTherapist.addExpertise("osteopathy");
 
         clinic.addTherapist(newTherapist);
         assertEquals(4, clinic.getTherapists().size());
@@ -63,6 +63,13 @@ class ClinicTest {
 
         // Test non-existent patient
         assertNull(clinic.findPatientByName("Nonexistent", "Patient"));
+    }
+
+    @org.junit.jupiter.api.Test
+    void testGetPatients(){
+        int expected = 1;
+        int patientsSize = clinic.getPatients().size();
+        assertEquals(expected, patientsSize);
     }
 
     @org.junit.jupiter.api.Test
@@ -112,8 +119,6 @@ class ClinicTest {
         assertEquals(patient, availableAppointment.getPatient());
         assertEquals(1, clinic.getBookedAppointments().size());
 
-        // Try to book already booked appointment
-//        assertDoesNotThrow(() -> clinic.bookAppointment(patient, availableAppointment.getAppointmentId()));
     }
 
     @org.junit.jupiter.api.Test
@@ -162,24 +167,23 @@ class ClinicTest {
     }
 
     @org.junit.jupiter.api.Test
-    void testGetAllAppointments() {
-    }
-
-    @org.junit.jupiter.api.Test
     void testGetAppointmentReport() {
         // Book and attend some appointments
         List<Appointment> therapist1Appointments = therapist.getCalendar();
+        String app1Id = therapist1Appointments.get(0).getAppointmentId();
+        List<Appointment> therapist2Appointments = clinic.getTherapists().get(0).getCalendar();
+        String app2Id = therapist2Appointments.get(0).getAppointmentId();
 
-        clinic.bookAppointment(patient, therapist1Appointments.get(0).getAppointmentId());
-        clinic.attendAppointment(therapist1Appointments.get(0).getAppointmentId());
+        clinic.bookAppointment(patient, app1Id);
+        clinic.attendAppointment(app1Id);
 
-//        clinic.bookAppointment(patient2, therapist2Appointments.get(0).getAppointmentId());
-//        clinic.attendAppointment(therapist2Appointments.get(0).getAppointmentId());
-//
-//        clinic.bookAppointment(patient1, therapist1Appointments.get(1).getAppointmentId());
-//        clinic.attendAppointment(therapist1Appointments.get(1).getAppointmentId());
+        clinic.bookAppointment(patient, app2Id);
+        clinic.attendAppointment(app2Id);
 
-        // Test the report output (we'll just verify it runs without exceptions)
+        clinic.bookAppointment(patient, app1Id);
+        clinic.attendAppointment(app1Id);
+
+        // Test the report output
         assertDoesNotThrow(() -> clinic.getAppointmentReport());
     }
 }

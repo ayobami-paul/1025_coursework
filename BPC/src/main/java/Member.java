@@ -1,5 +1,10 @@
 import java.util.UUID;
 
+/**
+ * Abstract class representing a member of the system.
+ * Contains basic personal details like name, address, and phone number.
+ * Serves as a base for more specific member types such as Patient or Therapist.
+ */
 public abstract class Member {
     private String id;
     private String firstName;

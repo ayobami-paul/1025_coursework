@@ -1,5 +1,9 @@
 import java.util.UUID;
 
+/**
+ * Represents an appointment in a clinic, linking a patient with a therapist for a specific treatment at a scheduled time.
+ * The appointment can be in different states: Available, Booked, Cancelled, or Attended.
+ */
 public class Appointment {
     private Patient patient;
     private Therapist therapist;
@@ -9,6 +13,14 @@ public class Appointment {
     private String bookingId;
     private String treatmentName;
 
+    /**
+     * Constructs an Appointment object with the specified details.
+     *
+     * @param appointmentId The unique identifier for the appointment.
+     * @param therapist The therapist assigned to the appointment.
+     * @param treatmentName The name of the treatment for the appointment.
+     * @param time The scheduled time of the appointment.
+     */
     public Appointment(String appointmentId, Therapist therapist, String treatmentName, String time) {
         this.appointmentId = appointmentId;
         this.therapist = therapist;
@@ -18,20 +30,38 @@ public class Appointment {
         this.bookingId = null;
     }
 
+    /**
+     * Gets the patient associated with the appointment.
+     *
+     * @return The Patient object, or null if no patient is booked.
+     */
     public Patient getPatient() {
         return patient;
     }
 
+    /**
+     * Gets the therapist associated with the appointment.
+     *
+     * @return The Therapist object.
+     */
     public Therapist getTherapist() {
         return therapist;
     }
 
+    /**
+     * Gets the unique identifier of the appointment.
+     *
+     * @return The appointment ID.
+     */
     public String getAppointmentId() {
         return appointmentId;
     }
 
-    // this method seems redundant
-    // i'm converting the treatments to individual strings instead of an array is why i'm leaving it for now
+    /**
+     * Gets a comma-separated string of all treatments offered by the therapist.
+     *
+     * @return A string listing all treatments.
+     */
     public String getTreatmentsByTherapist() {
         String treatments = "";
         for(String treatment: this.therapist.getAllTreatments()){
@@ -40,32 +70,55 @@ public class Appointment {
         return treatments;
     }
 
-//    public LocalDateTime getAppointmentTime(){
-//        return time;
-//    }
-
+    /**
+     * Books the appointment for a specific patient and updates the status to "Booked".
+     *
+     * @param patient The patient to book the appointment for.
+     */
     public void book(Patient patient) {
         this.patient = patient;
         this.status = "Booked";
     }
 
+    /**
+     * Cancels the appointment, removes the patient, and updates the status to "Cancelled".
+     */
     public void cancel(){
         this.patient = null;
         this.status = "Cancelled";
     }
 
+    /**
+     * Marks the appointment as attended and updates the status to "Attended".
+     */
     public void attend() {
         this.status = "Attended";
     }
 
+    /**
+     * Gets the current status of the appointment.
+     *
+     * @return The status of the appointment (e.g., "Available", "Booked", "Cancelled", "Attended").
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * Gets the name of the treatment associated with the appointment.
+     *
+     * @return The treatment name.
+     */
     public String getTreatmentName() {
         return treatmentName;
     }
 
+    /**
+     * Returns a string representation of the appointment, including its details.
+     * The format varies depending on whether the appointment is available or booked.
+     *
+     * @return A formatted string with appointment details.
+     */
     public String toString() {
         if(status.equals("Available")){
             return "\n********Available Appointment********" +

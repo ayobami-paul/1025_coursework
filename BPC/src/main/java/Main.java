@@ -61,44 +61,78 @@ public class Main {
                 case 3:
                     System.out.println("\nBook Appointment");
 
-                    System.out.print("Enter Patient First Name: ");
-                    String pFirstName = scanner.nextLine();
-                    System.out.print("Enter Patient Last Name: ");
-                    String pLastName = scanner.nextLine();
+                    // Get and validate patient name
+                    String pFirstName, pLastName;
+                    do {
+                        System.out.print("Enter Patient First Name: ");
+                        pFirstName = scanner.nextLine().trim();
+                        if (pFirstName.isEmpty()) {
+                            System.out.println("First name cannot be empty!");
+                        }
+                    } while (pFirstName.isEmpty());
+
+                    do {
+                        System.out.print("Enter Patient Last Name: ");
+                        pLastName = scanner.nextLine().trim();
+                        if (pLastName.isEmpty()) {
+                            System.out.println("Last name cannot be empty!");
+                        }
+                    } while (pLastName.isEmpty());
 
                     Patient foundPatient = clinic.findPatientByName(pFirstName, pLastName);
-
-                    if(foundPatient == null){
+                    if (foundPatient == null) {
                         System.out.println("Patient not found! Please register the patient first.");
                         break;
-                    } else {
-                        System.out.println("Patient found");
                     }
 
-                    clinic.getTherapists();
+                    // display therapist information
+                    clinic.getAllTherapists();
 
-                    System.out.println("1. Search by Expertise");
-                    System.out.println("2. Search by Physiotherapist Name");
-                    int searchOption = scanner.nextInt();
-                    scanner.nextLine();
+                    // Get search option
+                    int searchOption;
+                    while (true) {
+                        System.out.println("1. Search appointment by Expertise");
+                        System.out.println("2. Search appointment by Physiotherapist Name");
+                        System.out.print("Select search option: ");
 
+                        if (scanner.hasNextInt()) {
+                            searchOption = scanner.nextInt();
+                            scanner.nextLine();
+                            if (searchOption == 1 || searchOption == 2) break;
+                            System.out.println("Invalid option. Please enter 1 or 2.");
+                        } else {
+                            System.out.println("Invalid input. Please enter a number (1 or 2).");
+                            scanner.nextLine();
+                        }
+                    }
+
+                    // Perform search
                     if (searchOption == 1) {
                         System.out.print("Enter expertise: ");
                         String expertise = scanner.nextLine();
-
                         clinic.searchByExpertise(expertise);
-
-                    } else if (searchOption == 2) {
+                    } else {
                         System.out.print("Enter Physiotherapist Name: ");
                         String name = scanner.nextLine();
-
                         clinic.searchByTherapist(name);
                     }
 
-                    System.out.print("Enter appointment Id to confirm: ");
-                    String appointmentId = scanner.nextLine();
+                    // Get appointment ID
+                    String appointmentId;
+                    do {
+                        System.out.print("\nEnter appointment Id to confirm: ");
+                        appointmentId = scanner.nextLine().trim();
+                        if (appointmentId.isEmpty()) {
+                            System.out.println("\nAppointment ID cannot be empty!");
+                        }
+                    } while (appointmentId.isEmpty());
 
-                    clinic.bookAppointment(foundPatient, appointmentId);
+                    // Book appointment
+                    try {
+                        clinic.bookAppointment(foundPatient, appointmentId);
+                    } catch (Exception e) {
+                        System.out.println("Error booking appointment: " + e.getMessage());
+                    }
                     break;
 
                 case 4:
@@ -141,7 +175,7 @@ public class Main {
                     break;
 
                 case 7:
-                    clinic.getAllAppointments();
+//                    clinic.getAllAppointments();
                     clinic.getAppointmentReport();
                     break;
 

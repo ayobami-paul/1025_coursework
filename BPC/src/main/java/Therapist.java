@@ -210,7 +210,7 @@ public class Therapist extends Member{
         List<String> allTreatments = getAllTreatments();
         if (allTreatments.isEmpty()) return;
 
-        for (int week = 0; week < 3; week++) { // 4-week schedule
+        for (int week = 0; week < 4; week++) { // 4-week schedule
             for (int dayOffset = 0; dayOffset < 5; dayOffset++) { // Monday to Friday
                 // Calculate the specific day
                 LocalDate appointmentDate = startDate.with(DayOfWeek.MONDAY).plusWeeks(week).plusDays(dayOffset);

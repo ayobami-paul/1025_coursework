@@ -24,13 +24,13 @@ public class Main {
             switch (option) {
                 case 1:
                     System.out.print("\nEnter First Name: ");
-                    String firstName = scanner.nextLine();
+                    String firstName = scanner.nextLine().trim();
                     System.out.print("Enter Last Name: ");
-                    String lastName = scanner.nextLine();
+                    String lastName = scanner.nextLine().trim();
                     System.out.print("Enter Address: ");
-                    String address = scanner.nextLine();
+                    String address = scanner.nextLine().trim();
                     System.out.print("Enter Telephone: ");
-                    String phone = scanner.nextLine();
+                    String phone = scanner.nextLine().trim();
 
                     Patient newPatient = new Patient(firstName, lastName);
                     newPatient.addAddress(address);
@@ -38,15 +38,16 @@ public class Main {
 
                     clinic.addPatient(newPatient);
                     System.out.println("Patient Added");
+                    System.out.println(newPatient.getPatientDetail());
                     break;
 
                 case 2:
                     System.out.println("\nRemove Patient");
 
                     System.out.print("Enter Patient First Name: ");
-                    String fName = scanner.nextLine();
+                    String fName = scanner.nextLine().trim();
                     System.out.print("Enter Patient Last Name: ");
-                    String lName = scanner.nextLine();
+                    String lName = scanner.nextLine().trim();
 
                     Patient patientToRemove = clinic.findPatientByName(fName, lName);
 
@@ -110,11 +111,23 @@ public class Main {
                     if (searchOption == 1) {
                         System.out.print("Enter expertise: ");
                         String expertise = scanner.nextLine();
-                        clinic.searchByExpertise(expertise);
+                        if(clinic.searchExpertise(expertise)){
+                            clinic.searchByExpertise(expertise);
+                        }else {
+                            System.out.println("Expertise not found!");
+                            break;
+                        }
+
                     } else {
                         System.out.print("Enter Physiotherapist Name: ");
                         String name = scanner.nextLine();
-                        clinic.searchByTherapist(name);
+                        if(clinic.searchTherapistName(name)){
+                            clinic.searchByTherapist(name);
+                        } else {
+                            System.out.println("Therapist not found!");
+                            break;
+                        }
+
                     }
 
                     // Get appointment ID
@@ -175,9 +188,37 @@ public class Main {
                     break;
 
                 case 7:
-//                    clinic.getAllAppointments();
-                    clinic.getAppointmentReport();
-                    break;
+                    int reportOption;
+                    while (true) {
+                        System.out.println("1. Generate Clinic Appointments Report");
+                        System.out.println("2. Generate Report by Physiotherapist ");
+                        System.out.print("Select report option: ");
+
+                        if (scanner.hasNextInt()) {
+                            reportOption = scanner.nextInt();
+                            scanner.nextLine();
+                            if (reportOption == 1 || reportOption == 2) break;
+                            System.out.println("Invalid option. Please enter 1 or 2.");
+                        } else {
+                            System.out.println("Invalid input. Please enter a number (1 or 2).");
+                            scanner.nextLine();
+                        }
+                    }
+
+                    if (reportOption == 1) {
+                        clinic.getAppointmentReport();
+                        break;
+
+                    } else {
+                        System.out.print("Enter Physiotherapist Name: ");
+                        String name = scanner.nextLine();
+                        if(clinic.searchTherapistName(name)){
+                            clinic.getAppointmentReportByTherapist(name);
+                        } else {
+                            System.out.println("Therapist not found!");
+                            break;
+                        }
+                    }
 
                 case 8:
                     done = true;

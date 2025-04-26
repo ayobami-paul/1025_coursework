@@ -243,7 +243,7 @@ public class Therapist extends Member{
      */
     public String getTherapistDetails(){
         return "*********Physiotherapist Information*********"  +
-//                "\nID: " + getTherapistId() +
+                "\nID: " + getTherapistId() +
                 "\nName: " + super.getFirstName() + " " + super.getLastName() +
                 "\nExpertise: " + getExpertise() +
                 "\n";

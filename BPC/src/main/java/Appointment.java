@@ -105,6 +105,15 @@ public class Appointment {
     }
 
     /**
+     * Gets the time of the appointment.
+     *
+     * @return The time of the appointment (e.g., "Week1, Tue, 12:00").
+     */
+    public String getTime(){
+        return time;
+    }
+
+    /**
      * Gets the name of the treatment associated with the appointment.
      *
      * @return The treatment name.
@@ -120,22 +129,22 @@ public class Appointment {
      * @return A formatted string with appointment details.
      */
     public String toString() {
-        if(status.equals("Available")){
+        if(status.equalsIgnoreCase("Available")){
             return "\n********Available Appointment********" +
                     "\nAppointmentID: " + appointmentId +
-                    "\ntherapist: Dr " + therapist.getLastName() +
-                    "\ntreatment: " + treatmentName  +
-                    "\ntime: " + time +
-                    "\nstatus: " + status ;
+                    " | therapist: Dr " + therapist.getLastName() +
+                    " | treatment: " + treatmentName  +
+                    " | time: " + time +
+                    " | status: " + status ;
         }
         else {
             return "****Appointment****" +
                     "\nAppointmentID: " + appointmentId +
-                    "\ntherapist: Dr " + therapist.getLastName() +
-                    "\npatient: " + patient.getLastName() + " " + patient.getFirstName() +
-                    "\ntreatment: " + treatmentName +
-                    "\ntime: " + time +
-                    "\nstatus: " + status ;
+                    " | therapist: Dr " + therapist.getLastName() +
+                    " | patient: " + patient.getLastName() + " " + patient.getFirstName() +
+                    " | treatment: " + treatmentName +
+                    " | time: " + time +
+                    " | status: " + status ;
         }
     }
 }

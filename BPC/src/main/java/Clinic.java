@@ -75,18 +75,10 @@ public class Clinic {
     }
 
     /**
-     * Prints the details of all patients in the clinic.
-     */
-    public void getAllPatients() {
-        for (Patient patient : patients) {
-            System.out.println(patient.getPatientDetail());
-        }
-    }
-
-    /**
      * Prints the details of all therapists in the clinic.
      */
     public void getAllTherapists() {
+        System.out.println("\n****Clinic Therapist List****");
         for (Therapist therapist : therapists) {
             System.out.println(therapist.getTherapistDetails());
         }
@@ -148,6 +140,15 @@ public class Clinic {
     }
 
     /**
+     * Prints the details of all patients in the clinic.
+     */
+    public void getAllPatients() {
+        for (Patient patient : patients) {
+            System.out.println(patient.getPatientDetail());
+        }
+    }
+
+    /**
      * Gets the combined calendar of all therapists in the clinic.
      *
      * @return A list of lists, where each inner list represents a therapist's calendar.
@@ -174,6 +175,21 @@ public class Clinic {
     }
 
     /**
+     * Searches for a specific treatment expertise.
+     *
+     * @param expertise The expertise to search for (e.g., "physiotherapy").
+     * @return boolean - true or false
+     */
+    public boolean searchExpertise(String expertise){
+        for (Therapist therapist : therapists) {
+            if (therapist.getExpertise().contains(expertise.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Searches for available appointments by a specific treatment expertise.
      *
      * @param expertise The expertise to search for (e.g., "physiotherapy").
@@ -188,6 +204,21 @@ public class Clinic {
                 }
             }
         }
+    }
+
+    /**
+     * Searches for a therapist's name.
+     *
+     * @param therapistName The first or last name of the therapist.
+     * @return boolean - true or false
+     */
+    public boolean searchTherapistName(String therapistName){
+        for (Therapist therapist : therapists) {
+            if(therapist.getFirstName().equalsIgnoreCase(therapistName) || therapist.getLastName().equalsIgnoreCase(therapistName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -207,23 +238,36 @@ public class Clinic {
         }
     }
 
+
     /**
      * Books an appointment for a patient using the appointment ID.
      *
      * @param patient The patient to book the appointment for.
      * @param appointmentID The ID of the appointment to book.
      */
-    public void bookAppointment(Patient patient, String appointmentID){
+    public void bookAppointment(Patient patient, String appointmentID) {
         for (List<Appointment> appointments : getClinicCalendar()) {
             for (Appointment appointment : appointments) {
-                if(appointment.getAppointmentId().equalsIgnoreCase(appointmentID)){
+                if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID)) {
+
+                    // Check if patient already has a booking at the same time
+                    for (Appointment booked : bookedAppointments) {
+                        if (appointment.getTime().equals(booked.getTime()) && patient.equals(booked.getPatient())) {
+                            System.out.println("Patient cannot book another appointment in the same time slot.");
+                            return;
+                        }
+                    }
+
+                    // Book the appointment
                     appointment.book(patient);
                     bookedAppointments.add(appointment);
                     System.out.println("Appointment booked successfully!");
+                    return;
                 }
             }
         }
     }
+
 
     /**
      * Gets the list of all booked appointments in the clinic.
@@ -285,12 +329,16 @@ public class Clinic {
     /**
      * Prints a report of all booked appointments in the clinic.
      */
-    public void getAllAppointments(){
-        System.out.println("\n********All Appointments Report*********");
-        for(Appointment appointment: bookedAppointments){
-            System.out.println(appointment);
+    public void getAppointmentReportByTherapist(String therapistName) {
+        System.out.println("\n********Appointments Report*********");
+        for (Appointment appointment : bookedAppointments) {
+            Therapist therapist = appointment.getTherapist();
+            if (therapist != null && (therapistName.equalsIgnoreCase(therapist.getFirstName()) || therapistName.equalsIgnoreCase(therapist.getLastName()))) {
+                System.out.println(appointment);
+            }
         }
     }
+
 
     /**
      * Generates and prints a report of all appointments, sorted by therapist and attended count.
@@ -298,15 +346,13 @@ public class Clinic {
     public void getAppointmentReport(){
         // sort therapist in descending order by attended count
         therapists.sort((t1, t2) -> Integer.compare(getAttendedCount(t2), getAttendedCount(t1)));
-//        List<Appointment> appointments =  getClinicCalendar();
-
-//        System.out.println("\n*************Report for All Attended Appointments*******************");
 
         for (Therapist therapist : therapists) {
-            System.out.println("\n"+ therapist.getLastName() + " - Attended Appointments: " + getAttendedCount(therapist));
+            System.out.println("\nDr "+ therapist.getLastName() + " - Attended Appointments: " + getAttendedCount(therapist));
+            System.out.println("******Appointment Report*****");
 
             for (Appointment appointment : bookedAppointments) {
-                if (appointment.getTherapist().equals(therapist) ) { //&& appointment.getStatus().equalsIgnoreCase("Attended")
+                if (appointment.getTherapist().equals(therapist) ) {
                     System.out.println(appointment);
                 }
             }

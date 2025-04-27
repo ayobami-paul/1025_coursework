@@ -194,14 +194,14 @@ public class Main {
                         System.out.println("2. Generate Report by Physiotherapist ");
                         System.out.print("Select report option: ");
 
-                        if (scanner.hasNextInt()) {
+                        if (!scanner.hasNextInt()) {
+                            System.out.println("Invalid input. Please enter a number (1 or 2).");
+                            scanner.nextLine();
+                        } else {
                             reportOption = scanner.nextInt();
                             scanner.nextLine();
                             if (reportOption == 1 || reportOption == 2) break;
                             System.out.println("Invalid option. Please enter 1 or 2.");
-                        } else {
-                            System.out.println("Invalid input. Please enter a number (1 or 2).");
-                            scanner.nextLine();
                         }
                     }
 
@@ -214,6 +214,7 @@ public class Main {
                         String name = scanner.nextLine();
                         if(clinic.searchTherapistName(name)){
                             clinic.getAppointmentReportByTherapist(name);
+                            break;
                         } else {
                             System.out.println("Therapist not found!");
                             break;

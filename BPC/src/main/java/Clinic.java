@@ -288,9 +288,10 @@ public class Clinic {
             if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID) && appointment.getStatus().equalsIgnoreCase("Booked")){
                 appointment.cancel();
                 System.out.println("Appointment Cancelled");
-            } else{
-                System.out.println("Appointment not found");
             }
+//            else{
+//                System.out.println("Appointment not found");
+//            }
         }
     }
 
@@ -304,9 +305,10 @@ public class Clinic {
             if (appointment.getAppointmentId().equalsIgnoreCase(appointmentID) && appointment.getStatus().equalsIgnoreCase("Booked")){
                 appointment.attend();
                 System.out.println("Appointment Marked as attended");
-            } else {
-                System.out.println("Appointment not found");
             }
+//            else {
+//                System.out.println("Appointment not found");
+//            }
         }
     }
 

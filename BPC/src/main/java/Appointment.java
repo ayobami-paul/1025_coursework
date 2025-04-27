@@ -84,7 +84,6 @@ public class Appointment {
      * Cancels the appointment, removes the patient, and updates the status to "Cancelled".
      */
     public void cancel(){
-        this.patient = null;
         this.status = "Cancelled";
     }
 
